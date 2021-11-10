@@ -41,8 +41,8 @@ io.on("connection", (socket) => {
            console.log(`hello ${userName}`)
            socket.emit("welcome", {message:"hi"})
        })
-          socket.on("sendMessage", async({message}) => {
-             const mess =  await MessageModel.findOneAndUpdate(message,
+          socket.on("sendMessage", async({message, room}) => {
+             const mess =  await RoomModel.findOneAndUpdate({room},
                 {
                     $push: {chatHistory: message}
                 })
