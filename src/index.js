@@ -13,7 +13,11 @@ const httpServer = createServer(app)
 const io = new Server(httpServer, {allowEIO3:true})
 
 io.on("connection", (socket) => {
-
+    console.log(socket.id)
+       socket.on("login", ({userName}) => {
+           console.log(`hello ${userName}`)
+           socket.emit("welcome", {message:"hi"})
+       })
 })
 
 mongoose.connect(process.env.MONGO_URL).then(() => {
